@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9272e">
+  <title>陈华媛 — Academic Homepage</title>
+  <style>
+    :root {
+      --red: #ed2932;
+      --red-dark: #b90f1a;
+      --ink: #111111;
+      --paper: #f7f5ef;
+      --white: #fffefa;
+      --muted: #77736e;
+      --line: 3px solid var(--ink);
+      --shadow: 8px 8px 0 var(--ink);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    a { color: inherit; }
+    ::selection { color: var(--white); background: var(--red); }
+
+    .topbar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 18px clamp(20px, 5vw, 76px);
+      color: var(--white);
+      background: var(--ink);
+      border-bottom: 5px solid var(--red);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .76rem;
+    }
+    .brand { font-weight: 900; }
+    .brand span { color: var(--red); }
+    .nav { display: flex; gap: clamp(14px, 3vw, 36px); }
+    .nav a { text-decoration: none; font-weight: 800; }
+    .nav a:hover { color: #ff535a; }
+
+    .hero {
+      position: relative;
+      min-height: 78vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr);
+      align-items: center;
+      gap: 2rem;
+      padding: clamp(52px, 8vw, 112px) clamp(20px, 8vw, 120px);
+      isolation: isolate;
+      background:
+        radial-gradient(circle, rgba(17,17,17,.17) 1px, transparent 1.7px) 0 0 / 9px 9px,
+        var(--paper);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 56%;
+      height: 118%;
+      top: -8%;
+      right: -7%;
+      background: var(--red);
+      clip-path: polygon(19% 0, 100% 0, 100% 85%, 78% 100%, 0 77%, 12% 40%);
+      transform: rotate(-3deg);
+    }
+    .hero-copy { position: relative; z-index: 1; }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 1.25rem;
+      padding: 8px 13px;
+      color: var(--white);
+      background: var(--ink);
+      transform: skew(-8deg) rotate(-1deg);
+      font-family: Arial, sans-serif;
+      font-weight: 900;
+      font-size: .8rem;
+      letter-spacing: .16em;
+    }
+    h1 {
+      margin: 0;
+      max-width: 850px;
+      font-size: clamp(3.6rem, 10.5vw, 9.3rem);
+      line-height: .79;
+      letter-spacing: -.075em;
+      text-transform: uppercase;
+      font-weight: 1000;
+      text-shadow: 4px 4px 0 var(--paper), 8px 8px 0 var(--ink);
+      overflow-wrap: anywhere;
+    }
+    h1 .accent { display: block; color: var(--red); -webkit-text-stroke: 2px var(--ink); }
+    .subtitle {
+      margin: 2rem 0 0;
+      max-width: 520px;
+      font-family: Arial, sans-serif;
+      font-size: clamp(1rem, 2vw, 1.22rem);
+      line-height: 1.65;
+      font-weight: 700;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 2rem; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border: var(--line);
+      box-shadow: 5px 5px 0 var(--ink);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: .82rem;
+      font-weight: 900;
+      letter-spacing: .06em;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .button:hover { transform: translate(4px, 4px); box-shadow: 1px 1px 0 var(--ink); }
+    .button.primary { color: var(--white); background: var(--ink); }
+    .button.secondary { background: var(--white); }
+
+    .hero-stamp {
+      position: relative;
+      justify-self: center;
+      width: min(100%, 390px);
+      aspect-ratio: .82;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+      color: var(--white);
+      background: var(--ink);
+      border: 5px solid var(--white);
+      outline: 4px solid var(--ink);
+      box-shadow: 13px 13px 0 rgba(0,0,0,.35);
+      transform: rotate(4deg);
+      clip-path: polygon(4% 0, 100% 5%, 94% 100%, 0 93%);
+    }
+    .stamp-top, .stamp-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: .7rem;
+      letter-spacing: .13em;
+    }
+    .starburst {
+      align-self: center;
+      display: grid;
+      place-items: center;
+      width: 78%;
+      aspect-ratio: 1;
+      margin: -4px 0;
+      color: var(--ink);
+      background: var(--red);
+      clip-path: polygon(50% 0%, 61% 20%, 82% 8%, 81% 31%, 100% 39%, 82% 53%, 96% 75%, 70% 74%, 63% 100%, 47% 80%, 27% 96%, 28% 70%, 2% 67%, 19% 49%, 0 31%, 27% 28%, 30% 4%);
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      font-weight: 1000;
+      text-align: center;
+      line-height: .85;
+      transform: rotate(-8deg);
+    }
+    .stamp-bottom { font-size: .68rem; }
+    .vertical-note {
+      position: absolute;
+      right: 18px;
+      bottom: 34px;
+      writing-mode: vertical-rl;
+      font-size: .66rem;
+      letter-spacing: .2em;
+      font-weight: 900;
+    }
+
+    .ticker {
+      overflow: hidden;
+      color: var(--white);
+      background: var(--red);
+      border-top: 4px solid var(--ink);
+      border-bottom: 4px solid var(--ink);
+      transform: skewY(-1.5deg) scale(1.02);
+      padding: 13px 0;
+      white-space: nowrap;
+      font-weight: 1000;
+      letter-spacing: .12em;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+    }
+    .ticker span { display: inline-block; padding-left: 2rem; }
+
+    .section {
+      padding: clamp(64px, 9vw, 112px) clamp(20px, 8vw, 120px);
+    }
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 36px;
+      border-bottom: 5px solid var(--ink);
+      padding-bottom: 14px;
+    }
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(2.2rem, 5.5vw, 5rem);
+      line-height: .9;
+      letter-spacing: -.06em;
+      text-transform: uppercase;
+    }
+    .section-heading p {
+      margin: 0;
+      max-width: 230px;
+      text-align: right;
+      font: 700 .76rem/1.5 Arial, sans-serif;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .info-card {
+      position: relative;
+      padding: clamp(22px, 4vw, 38px);
+      background: var(--white);
+      border: var(--line);
+      box-shadow: var(--shadow);
+    }
+    .info-card.red { color: var(--white); background: var(--red); }
+    .card-index {
+      display: inline-block;
+      margin-bottom: 28px;
+      padding: 5px 9px;
+      border: 2px solid currentColor;
+      font-size: .72rem;
+      letter-spacing: .12em;
+    }
+    .info-card h3 {
+      margin: 0 0 12px;
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      text-transform: uppercase;
+      letter-spacing: -.04em;
+    }
+    .info-card p { margin: 0; font: 700 1rem/1.7 Arial, sans-serif; overflow-wrap: anywhere; }
+    .email-link { text-decoration-thickness: 2px; text-underline-offset: 4px; }
+    .email-link:hover { color: var(--red); }
+    .red .email-link:hover { color: var(--ink); }
+    .note {
+      margin-top: 40px;
+      padding: 18px 20px;
+      border-left: 8px solid var(--red);
+      background: #e9e5dc;
+      font: 700 .92rem/1.65 Arial, sans-serif;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 24px clamp(20px, 8vw, 120px);
+      color: var(--white);
+      background: var(--ink);
+      border-top: 7px solid var(--red);
+      font: 700 .75rem/1.5 Arial, sans-serif;
+      letter-spacing: .05em;
+    }
+    footer strong { color: var(--red); }
+    .back-top { color: var(--white); text-decoration: none; border-bottom: 1px solid var(--red); }
+
+    @media (max-width: 760px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .hero { grid-template-columns: 1fr; gap: 54px; padding-top: 70px; }
+      .hero::before { width: 78%; height: 58%; top: auto; bottom: 0; right: -18%; }
+      .hero-stamp { width: min(74%, 330px); }
+      .vertical-note { display: none; }
+      .info-grid { grid-template-columns: 1fr; gap: 18px; }
+      .section-heading { align-items: flex-start; flex-direction: column; }
+      .section-heading p { text-align: left; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="返回主页" style="text-decoration:none">PERSONAL <span>FILE</span> / 001</a>
+    <nav class="nav" aria-label="主导航">
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow">Academic Profile / Welcome</div>
+        <h1 id="hero-title">HUA YUAN<span class="accent">CHEN.</span></h1>
+        <p class="subtitle">
+          HKUST (Guangzhou) · Researcher. Thinker. Work in progress.<br>
+          欢迎来到我的学术主页，这里记录我的研究方向、学术兴趣与项目进展。
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#about">认识我 / About Me ↘</a>
+          <a class="button secondary" href="mailto:hchen758@connect.hkust-gz.edu.cn">发送邮件 / Email ↗</a>
+        </div>
+      </div>
+
+      <aside class="hero-stamp" aria-label="个人档案视觉标识">
+        <div class="stamp-top"><span>RESEARCHER</span><span>NO. 001</span></div>
+        <div class="starburst">THINK<br>BEYOND<br>LIMITS</div>
+        <div class="stamp-bottom"><span>ACADEMIC PROFILE</span><span>EST. 20XX</span></div>
+      </aside>
+      <div class="vertical-note">RESEARCH • IDEAS • DISCOVERY</div>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <span>RESEARCH • CURIOSITY • IDEAS • DISCOVERY • RESEARCH • CURIOSITY • IDEAS • DISCOVERY •</span>
+    </div>
+
+    <section class="section" id="about">
+      <div class="section-heading">
+        <h2>About<br>Me.</h2>
+        <p>Identity / Research / Contact<br>Scroll to explore ↓</p>
+      </div>
+      <div class="info-grid">
+        <article class="info-card">
+          <span class="card-index">FILE 01 / IDENTITY</span>
+          <h3>Who I Am</h3>
+          <p>
+            你好，我是 <strong>陈华媛（Hua Yuan Chen）</strong>，来自香港科技大学（广州）（HKUST (Guangzhou)）。<br>
+            我的研究兴趣包括游戏开发、虚拟现实 / 增强现实（VR/AR）以及人机交互（HCI）。
+            欢迎交流学术想法、研究合作与项目机会。
+          </p>
+        </article>
+        <article class="info-card red" id="contact">
+          <span class="card-index">FILE 02 / CONTACT</span>
+          <h3>Get In Touch</h3>
+          <p>香港科技大学（广州）｜游戏开发 · VR/AR · HCI。想讨论研究、合作或只是打个招呼？欢迎通过邮箱联系我。</p>
+          <p style="margin-top:18px">
+            <a class="email-link" href="mailto:hchen758@connect.hkust-gz.edu.cn">hchen758@connect.hkust-gz.edu.cn ↗</a>
+          </p>
+        </article>
+      </div>
+      <div class="note">
+        <strong>研究兴趣：</strong>Game Development · Virtual / Augmented Reality (VR/AR) · Human-Computer Interaction (HCI)。
+        页面采用单文件设计，不依赖外部图片、字体或 JavaScript。
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 <strong>陈华媛 · HUA YUAN CHEN</strong> · Personal Academic Homepage</span>
+    <a class="back-top" href="#top">BACK TO TOP ↑</a>
+  </footer>
+</body>
+</html>
